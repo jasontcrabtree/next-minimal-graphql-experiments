@@ -4,13 +4,84 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 18px;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  color: slateblue;
+  text-decoration: underline;
 }
 
 * {
   box-sizing: border-box;
+}
+
+* + * {
+  /* margin-top: 1rem; */
+}
+
+label {
+  display: block;
+
+  margin-top: 2rem;
+  line-height: 1.5;
+}
+
+input[type='button'],
+button {
+  background-color: rgb(255, 243, 224);
+  font-size: 18px;
+  font-weight: 400;
+  padding: 8px 24px;
+  border: 1px solid rgb(214, 163, 81);
+  border-radius: 2px;
+}
+
+input {
+  padding: 16px;
+  border-radius: 2px;
+  border: slategray 1px solid;
+  font-size: 16px;
+  width: 100%;
+}
+
+img {
+  max-width: 240px;
+}
+
+li {
+  list-style-type: none;
+  border: 1px solid rgb(214, 163, 81);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+img {
+  object-fit: cover;
+}
+
+ul {
+  padding-inline-start: 0px;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1rem;
+}
+
+input {
+  max-width: 64ch;
+}
+
+form > button {
+  margin-top: 2rem;
 }

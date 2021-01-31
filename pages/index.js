@@ -1,65 +1,70 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+/* eslint-disable no-nested-ternary */
+import Head from 'next/head';
+import { request } from 'graphql-request';
+import useSWR from 'swr';
+import React from 'react';
+
+import Link from 'next/link';
+import styles from '../styles/Home.module.css';
+
+const API = 'https://jtc-nextjs-course.herokuapp.com/v1/graphql';
+const fetcher = (query) => request(API, query);
 
 export default function Home() {
+  const { data } = useSWR(
+    `{
+      recipes(order_by: { name: asc }) {
+        id
+        name
+        imageUrl
+      }
+    }
+  `,
+    fetcher
+  );
+
   return (
-    <div className={styles.container}>
+    <div className={styles.parent}>
       <Head>
-        <title>Create Next App</title>
+        <title>Graphql-Request Next JS</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <main>
+        <nav>
+          <ul>
+            <li>
+              <Link href="/new">
+                <a>New</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/create">
+                <a>Create</a>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <h1>Coffee With That?</h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        <section>
+          {(console.log(data), [])}
+          {!data ? (
+            <p>Loading …</p>
+          ) : data.recipes.length === 0 ? (
+            <p>No recipes!</p>
+          ) : (
+            <ul>
+              {data.recipes.map((food, i) => (
+                <li key={i}>
+                  <p>{food.name}</p>
+                  <img src={food.imageUrl} alt={food.name} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
-  )
+  );
 }
