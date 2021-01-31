@@ -7,7 +7,7 @@ Doesn't work right not, truing to use useState
 
 import request from 'graphql-request';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from '../styles/Home.module.css';
 
@@ -23,14 +23,14 @@ const mutation = `
   }
 `;
 
-const number = 32;
+/* const number = 32;
 const number1 = '32';
 
-console.log(typeof number, typeof number1);
+console.log(typeof number, typeof number1); */
 
 const CreateLink = (props) => {
-  const [name, setName] = React.useState('');
-  const [url, setUrl] = React.useState('');
+  const [name, setName] = useState('');
+  const [url, setUrl] = useState('');
 
   // const submit = React.useCallback((value) => {
   //   // ... you'll implement this 🔜
@@ -38,12 +38,12 @@ const CreateLink = (props) => {
 
   const { values } = [name, url];
 
-  console.log(values);
-
-  const submit = () => {
+  function submitHandler(e) {
+    e.preventDefault();
     const variables = { object: values };
+    console.log(variables);
     request(API, mutation, variables);
-  };
+  }
 
   return (
     <div className={styles.parent}>
@@ -55,7 +55,7 @@ const CreateLink = (props) => {
       </header>
 
       <main>
-        <form>
+        <form onSubmit={submitHandler}>
           <label htmlFor="name">
             <input
               id="name"
@@ -74,9 +74,7 @@ const CreateLink = (props) => {
               placeholder="The URL for the link"
             />
           </label>
-          <button type="submit" onClick={submit}>
-            Submit
-          </button>
+          <button type="submit">Submit</button>
         </form>
       </main>
     </div>

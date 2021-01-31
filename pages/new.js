@@ -29,6 +29,17 @@ const mutation = `
 `;
 
 export default function New() {
+  const initialValues = {
+    name: '',
+    imageUrl: '',
+  };
+
+  function submitHandler(values) {
+    const variables = { object: values };
+    request(API, mutation, variables);
+    console.log('reset');
+  }
+
   return (
     <div className={styles.parent}>
       <header>
@@ -40,16 +51,7 @@ export default function New() {
 
       <main>
         <div>
-          <Formik
-            initialValues={{
-              name: '',
-              imageUrl: '',
-            }}
-            onSubmit={(values) => {
-              const variables = { object: values };
-              request(API, mutation, variables);
-            }}
-          >
+          <Formik initialValues={initialValues} onSubmit={submitHandler}>
             {({ values, handleChange, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <label htmlFor="name">
@@ -61,7 +63,6 @@ export default function New() {
                     placeholder="Recipe Name"
                   />
                 </label>
-
                 <label htmlFor="imageUrl">
                   Image URL
                   <input
@@ -71,7 +72,6 @@ export default function New() {
                     placeholder="Recipe URL"
                   />
                 </label>
-
                 <button type="submit">Save</button>
               </form>
             )}

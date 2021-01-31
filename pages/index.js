@@ -48,7 +48,7 @@ export default function Home() {
         <h1>Coffee With That?</h1>
 
         <section>
-          {(console.log(data), [])}
+          {/* {(console.log(data), [])} */}
           {!data ? (
             <p>Loading …</p>
           ) : data.recipes.length === 0 ? (
