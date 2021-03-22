@@ -1,7 +1,7 @@
 /*
 31/01/2021
 
-Doesn't work right not, truing to use useState
+Doesn't work right not, trying to use useState
 
 */
 
@@ -29,6 +29,7 @@ const number1 = '32';
 console.log(typeof number, typeof number1); */
 
 const CreateLink = (props) => {
+  console.log(props);
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
 

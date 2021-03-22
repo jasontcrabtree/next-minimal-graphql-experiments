@@ -7,6 +7,7 @@ Currently working
 31/01/201
 Changelog
 - Refactoring into seperate onSubmit function
+
 */
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -29,15 +30,17 @@ const mutation = `
 `;
 
 export default function New() {
+  // Sets the form default values to 0
   const initialValues = {
     name: '',
     imageUrl: '',
   };
 
   function submitHandler(values) {
+    console.log(values);
     const variables = { object: values };
+
     request(API, mutation, variables);
-    console.log('reset');
   }
 
   return (

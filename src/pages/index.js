@@ -39,8 +39,8 @@ export default function Home() {
               </Link>
             </li>
             <li>
-              <Link href="/create">
-                <a>Create</a>
+              <Link href="/new-with-state">
+                <a>New with State</a>
               </Link>
             </li>
           </ul>
@@ -48,15 +48,14 @@ export default function Home() {
         <h1>Coffee With That?</h1>
 
         <section>
-          {/* {(console.log(data), [])} */}
           {!data ? (
             <p>Loading …</p>
-          ) : data.recipes.length === 0 ? (
+          ) : data?.recipes?.length === 0 ? (
             <p>No recipes!</p>
           ) : (
             <ul>
               {data.recipes.map((food, i) => (
-                <li key={i}>
+                <li className={styles.card} key={i}>
                   <p>{food.name}</p>
                   <img src={food.imageUrl} alt={food.name} />
                 </li>

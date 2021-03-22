@@ -16,6 +16,7 @@ import styles from '../styles/Home.module.css';
 const API = 'https://jtc-nextjs-course.herokuapp.com/v1/graphql';
 
 const AddNew = (props) => {
+  console.log(props, API, request);
   //   const [name, setName] = React.useState('');
   //   const [url, setUrl] = React.useState('');
 
