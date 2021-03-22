@@ -31,32 +31,10 @@ export default function New() {
     return formValues;
   }
 
-  console.log(formValues);
-
-  function fakeSubmission() {
-    const name = {
-      name: 'hello this is a fake submission',
-      imageUrl: 'url.com',
-    };
-    const fakeObject = { object: name };
-    console.log(fakeObject);
-
-    request(API, mutation, fakeObject);
-  }
-
-  // fakeSubmission();
-
-  // eslint-disable-next-line no-shadow
-  function submitHandler(e, formValues) {
+  function submitHandler(e) {
     e.preventDefault();
 
-    console.log(formValues);
-
-    // const variables = { object: form };
-
     const variables = { object: formValues };
-
-    console.log(variables);
 
     request(API, mutation, variables);
   }
@@ -84,7 +62,7 @@ export default function New() {
                 autoComplete="off"
                 value={formValues.name}
                 onChange={updateField}
-                // placeholder="Recipe Name"
+                placeholder="Meal Name"
               />
             </label>
             <label htmlFor="imageUrl">
@@ -96,6 +74,7 @@ export default function New() {
                 autoComplete="off"
                 value={formValues.imageUrl}
                 onChange={updateField}
+                placeholder="Image URL"
               />
             </label>
             <button type="submit">Save</button>
